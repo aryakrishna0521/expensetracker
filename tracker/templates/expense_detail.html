@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+
+<div class="container">
+    <h1 class="text-center">STUDENT DETAILS</S></h1>
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                {%if data.picture%}
+                <img src="{{data.picture.url}}" class="h-100 w-100 rounded-start" alt="...">
+                {%endif%}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title"> Title : {{data.title}} </h4>
+                    <p class="card-text"> Category : {{data.Category}} </p>
+                    <p class="card-text">Amount : {{data.Amount}} </p>
+                    <p class="card-text">Payment Type : {{data.payment_type}} </p>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

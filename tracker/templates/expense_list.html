@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+
+
+
+
+
+
+{%if messages%}
+{%for m in messages%}
+<div class="w-50 mx-auto">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{m}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+{%endfor%}
+{%endif%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+<body >
+
+    <div class="container p-4 ">
+        {%for t in data%}
+        <div class="card mb-4 rounded py-2">
+            <div class="card-body">
+              
+                    <div class="d-flex justify-content-evenly">
+                        <div>{{t.title}}</div>
+                         <div>{{t.Amount}}</div>
+                         <div >
+                            <a href="{%url 'expense-detail' t.id%}"><i class="ms-4 fa-solid fa-eye"></i></a>
+                            <a href="{%url 'expense-delete' t.id%}"><i class="ms-4 fa-solid fa-trash"></i></a>
+                            <a href="{%url 'expense-update' t.id%}"><i class="ms-4 fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+
+                    
+                    
+               
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+
+
+
+{%endblock%}
