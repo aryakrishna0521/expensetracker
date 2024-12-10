@@ -39,6 +39,7 @@ class ExpenseTracker(models.Model):
     )
 
     payment_method=models.CharField(max_length=100,choices=payment_options,default="cash")
+    owner=models.ForeignKey(User,on_delete=models.CASCADE, )
 
 
     def __str__(self):

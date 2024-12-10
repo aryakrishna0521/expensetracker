@@ -39,7 +39,7 @@ class ExpenseForm(forms.ModelForm):
 
         widgets={
                 "title":forms.TextInput(attrs={"class":"form-control"}),
-                "category":forms.TextInput(attrs={"class":"form-control"}),
+                "category":forms.Select(attrs={"class":"form-control form-select"}),
                 "Amount":forms.TextInput(attrs={"class":"form-control"}),
                 "payment_method":forms.Select(attrs={"class":"form-control form-select"}),
 

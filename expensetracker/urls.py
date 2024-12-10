@@ -21,11 +21,13 @@ from tracker import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/',views.SignUpView.as_view(),name="signup"),
-    path("",views.SignInView.as_view(),name="signin"),
+    path("signin",views.SignInView.as_view(),name="signin"),
     path("signout/",views.SignOutView.as_view(),name="signout"),
     path("expense/list/",views.ExpenseListView.as_view(),name="expense-list"),
     path("expense/add/",views.ExpenseAddView.as_view(),name="expense-add"),
     path("expense/<int:pk>/",views.ExpenseDetailView.as_view(),name="expense-detail"),
     path("expense/<int:pk>/remove/",views.ExpenseDeleteView.as_view(),name="expense-delete"),
-    path("expense/<int:pk>/change/",views.ExpenseUpdateView.as_view(),name="expense-update")
+    path("expense/<int:pk>/change/",views.ExpenseUpdateView.as_view(),name="expense-update"),
+    path('expense/summary/',views.ExpenseSummaryView.as_view(),name="expense-summary")
+    
 ]

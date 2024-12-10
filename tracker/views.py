@@ -106,7 +106,7 @@ class ExpenseListView(View):
 
         search_text=request.GET.get("filter")
 
-        qs=ExpenseTracker.objects.all()
+        qs=ExpenseTracker.objects.filter(owner=request.user)
 
         all_title=ExpenseTracker.objects.values_list("title",flat=True).distinct()
 
@@ -150,7 +150,7 @@ class ExpenseAddView(View):
 
             data=form_instance.cleaned_data
 
-            ExpenseTracker.objects.create(**data)
+            ExpenseTracker.objects.create(**data,owner=request.user)
 
             return redirect("expense-list")
 
@@ -231,3 +231,26 @@ class ExpenseUpdateView(View):
 
         return render(request,self.template_name,{"form":form_instance})
 
+from django.db.models import Sum
+
+class ExpenseSummaryView(View):
+    template_name="expense_summary.html"
+    def get(self,request,*args,**kwargs):
+        qs=ExpenseTracker.objects.filter(owner=request.user)
+
+        total_expense=qs.values("Amount").aggregate(total=Sum("Amount"))
+        print(total_expense)
+
+        payment_summary=qs.values("payment_method").annotate(total=Sum("Amount"))
+        print(payment_summary)
+
+        category_summary=qs.values("category").annotate(total=Sum("Amount"))
+        print(category_summary)
+
+        context={
+            "total_expense":total_expense.get("total"),
+            "payment_summary":payment_summary,
+            "category_summary":category_summary
+        }
+
+        return render(request,self.template_name,context)
